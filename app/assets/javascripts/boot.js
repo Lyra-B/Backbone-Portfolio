@@ -25,4 +25,15 @@ $(document).ready(function() {
     var view = new app.views.ProjectView({ model: project });
     $('#project-list').append(view.render().el);
   });
+
+  var user = new app.models.User({
+    name: "Sally",
+    bio: "Kick ass coder",
+    mission: "Learn Backbone",
+    image_url: "http://img2.wikia.nocookie.net/__cb20121212081306/archiesonic/images/a/a2/Sally_Acorn_Profile.jpg"
+  });
+
+  var userView = new app.views.UserView({ model: user });
+  $('#user').html(userView.render().el);
+
 });
