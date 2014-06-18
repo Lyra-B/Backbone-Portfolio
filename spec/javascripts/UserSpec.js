@@ -13,22 +13,26 @@ describe("A User", function() {
 	describe("projects", function() {
 		beforeEach(function() {
 			var someoneElse = new app.models.User({ name: "Bob" });
-			someoneElse.projects.create({ title : "Test" });
 			someoneElse.save();
+			someoneElse.projects.create({ title : "Test" });
 
 			var project = new app.models.Project({
 				title: "My Amazing Project"
 			});
-			user.projects.add(project);
 			user.save();
+			user.projects.create(project);
+		});
+
+		afterEach(function() {
+		  // Wipe the old projects
+			localStorage.clear();
 		});
 
 		it("should store the projects as well", function() {
 			// Force the user to be reloaded from the backing store
 			saved_user = new app.models.User({ id: user.id });
 			saved_user.fetch();
-
-			expect(user.projects.length).toEqual(1);
+			expect(saved_user.projects.length).toEqual(1);
 		});
 	});
 
