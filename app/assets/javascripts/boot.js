@@ -34,6 +34,6 @@ $(document).ready(function() {
   });
 
   var userView = new app.views.UserView({ model: user });
-  $('#user').html(userView.render().el);
+  userView.render();
 
 });
