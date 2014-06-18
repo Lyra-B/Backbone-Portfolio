@@ -26,14 +26,11 @@ $(document).ready(function() {
     $('#project-list').append(view.render().el);
   });
 
-  var user = new app.models.User({
-    name: "Sally",
-    bio: "Kick ass coder",
-    mission: "Learn Backbone",
-    image_url: "http://img2.wikia.nocookie.net/__cb20121212081306/archiesonic/images/a/a2/Sally_Acorn_Profile.jpg"
-  });
+  var users = new app.collections.UserList();
+  users.fetch();
+  if(users.length == 0) users.add({});
 
-  var userView = new app.views.UserView({ model: user });
+  var userView = new app.views.UserView({ model: users.models[0] });
   userView.render();
 
 });

@@ -1,6 +1,11 @@
 app.models.User = Backbone.Model.extend({
 
-	localStorage: new Backbone.LocalStorage('portfolio-user'),
+	defaults: {
+		name: null,
+		bio: null,
+		mission: null,
+		image_url: null
+	},
 
 	validate: function() {
 		var errors = { messages: [] };
