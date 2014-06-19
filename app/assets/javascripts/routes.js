@@ -9,7 +9,12 @@ app.Router = Backbone.Router.extend({
 	userIndex: function() {
 		var users = new app.collections.UserList();
 	  users.fetch();
-	  if(users.length == 0) users.add({});
+	  if(users.length == 0) users.create({
+	  	name: "Edit me",
+	  	bio: "Edit me",
+	  	mission: "Edit me",
+	  	image_url: "uploads/me.jpg"
+	  });
 
 	  var userIndexView = new app.views.UserListView({ collection : users });
 	  userIndexView.render();
