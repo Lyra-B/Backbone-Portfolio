@@ -39,4 +39,5 @@ gem 'spring',        group: :development
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.99.0'
+  gem 'faker'
 end
