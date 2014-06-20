@@ -1,6 +1,6 @@
 app.models.User = Backbone.Model.extend({
 
-	url: "/users",
+	urlRoot: "/users",
 
 	initialize: function() {
 		this.projects = new app.collections.ProjectList();

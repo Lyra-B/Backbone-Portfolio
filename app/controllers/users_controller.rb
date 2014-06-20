@@ -8,6 +8,14 @@ class UsersController < ApplicationController
 		render :json => @user
 	end
 
+	def show
+		@user = User.find(params[:id])
+		respond_to do |format|
+			format.html
+			format.json { render :json => @user }
+		end
+	end
+
 	private 
 	def allowed_params
 		params.require(:user).permit(:name, :bio, :mission, :image_url)
