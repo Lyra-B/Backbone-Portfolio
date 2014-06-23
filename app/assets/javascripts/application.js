@@ -1,6 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require ./libs/underscore-min
+//= require underscore
 //= require_tree ./libs
 //= require app
 //= require_tree ./models
