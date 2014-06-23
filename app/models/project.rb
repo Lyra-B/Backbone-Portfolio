@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+	belongs_to :project
 	has_many :skills
 
 	def as_json(options = nil)

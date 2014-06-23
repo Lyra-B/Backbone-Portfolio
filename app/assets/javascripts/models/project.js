@@ -3,7 +3,7 @@ app.models.Project = Backbone.Model.extend({
   url: "/projects",
 
   initialize: function() {
-  	this.skills = new app.collections.SkillList();
+  	if(!this.skills) this.skills = new app.collections.SkillList();
   },
   
   validate: function() {
@@ -18,6 +18,8 @@ app.models.Project = Backbone.Model.extend({
 
   parse: function(response) {
   	var _this = this;
+
+    if(!this.skills) this.skills = new app.collections.SkillList();
 
   	_(response.skills).each(function(skill) {
   		_this.skills.add(skill);

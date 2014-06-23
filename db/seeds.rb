@@ -1,7 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+dan = User.new(:name => "Dan", :image_url => '/uploads/me.jpg', 
+	:bio => "Web Developer from London, UK", :mission => "To get better at coding")
+
+bucket_list = Project.new(:title => "Bucket List", :image_url => '/uploads/project.jpg')
+bucket_list.skills << Skill.new(:name => 'Ruby')
+bucket_list.skills << Skill.new(:name => 'Rails')
+bucket_list.skills << Skill.new(:name => 'AJAX')
+bucket_list.skills << Skill.new(:name => 'RSpec')
+bucket_list.skills << Skill.new(:name => 'Cucumber')
+
+dan.projects << bucket_list
+
+dan.save!
