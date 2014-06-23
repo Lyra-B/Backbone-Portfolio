@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>My Amazing Fat Client Portfolio Builder</title>
+  <%= stylesheet_link_tag :application %>
+</head>
+
+<body>
+  <nav id="navigation">
+  </nav>
+
+  <main id="content">
+    <%= yield %>
+  </main>
+
+  <footer>
+  </footer>
+
+  <!-- Load application scripts at the end of the body, so that we
+  don't slow up the loading time of the DOM -->
+  <%= javascript_include_tag :application %>
+</body>
+
+</html>
