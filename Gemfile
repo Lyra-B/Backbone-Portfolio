@@ -37,6 +37,9 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+gem 'ejs'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.99.0'
   gem 'faker'
