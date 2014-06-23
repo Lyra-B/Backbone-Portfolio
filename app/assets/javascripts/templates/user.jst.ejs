@@ -1,0 +1,26 @@
+<div id="bio">
+  <img src="<%= image_url ? image_url : 'uploads/me.jpg' %>" width="200" height="200" alt="<%= name %>"
+  class="bio-image shadowed" />
+
+  <div class="bio-text">
+    <h1 class="name"><%= name ? name : "Edit me" %></h1>
+    <input type="text" class="edit-name hidden-edit" placeholder="Please enter your name" />
+
+    <h2 class="bio">
+      <%= bio ? bio : "Edit your bio" %>
+    </h2>
+
+    <h3 class="mission">
+      <%= mission ? mission : "Edit your mission" %>
+    </h3>
+  </div>
+</div>
+
+<div id="projects">
+  <h2>Recent Project Work</h2>
+
+  <div id="project-list">
+  </div>
+
+  <div class="clear"></div>
+</div>

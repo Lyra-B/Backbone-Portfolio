@@ -1,7 +1,7 @@
 app.views.UserView = Backbone.View.extend({
 
 	el: "#content",
-	template: _.template($('#user-template').html()),
+	template: JST['templates/user'],
 	events: {
 		"dblclick h1.name": "editName",
 		"change .edit-name": "updateName"

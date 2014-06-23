@@ -16,102 +16,6 @@
     <!-- Our views go in here -->
   </main>
 
-  <script type="text/template" id="user-template">
-    <div id="bio">
-      <img src="<%= image_url ? image_url : 'uploads/me.jpg' %>" width="200" height="200" alt="<%= name %>"
-      class="bio-image shadowed" />
-
-      <div class="bio-text">
-        <h1 class="name"><%= name ? name : "Edit me" %></h1>
-        <input type="text" class="edit-name hidden-edit" placeholder="Please enter your name" />
-
-        <h2 class="bio">
-          <%= bio ? bio : "Edit your bio" %>
-        </h2>
-
-        <h3 class="mission">
-          <%= mission ? mission : "Edit your mission" %>
-        </h3>
-      </div>
-    </div>
-
-    <div id="projects">
-      <h2>Recent Project Work</h2>
-
-      <div id="project-list">
-      </div>
-
-      <div class="clear"></div>
-    </div>
-
-  </script>
-
-  <script type="text/template" id="project-template">
-    <div class="sortable">
-    </div>
-
-    <div class="info">
-      <img src="uploads/project.jpg" width="350" height="165"
-      alt="My Amazing Project" class="project-image shadowed" />
-
-      <div class="project-details">
-        <h3 class="project-name">
-          <%= title %>
-        </h3>
-
-        <input class="edit-title hidden-edit" placeholder="Enter a title">
-
-        <a href="<%= url %>">
-          <%= url %>
-        </a>
-
-        <div class="skills">
-          <span class="skill-label">
-            Skills:
-          </span>
-
-          <ul class="skill-list">
-            <li class="skill">
-              <span class="name">Ruby</span>
-              <span class="delete">Remove</span>
-            </li>
-            <li class="skill">
-              <span class="name">Rails</span>
-              <span class="delete">Remove</span>
-            </li>
-            <li class="skill">
-              <span class="name">AJAX</span>
-              <span class="delete">Remove</span>
-            </li>
-            <li class="skill">
-              <span class="name">HTML 5</span>
-              <span class="delete">Remove</span>
-            </li>
-            <li class="skill">
-              <span class="name">CSS</span>
-              <span class="delete">Remove</span>
-            </li>
-            <li class="skill">
-              <span class="name">Javascript</span>
-              <span class="delete">Remove</span>
-            </li>
-          </ul>
-
-          <span class="add-skill">Add Skill</span>
-        </div>
-
-        <div class="body">
-          <%= body %>
-        </div>
-      </div>
-    </div>
-
-    <div class="remove-project">
-      Remove Project
-    </div>
-
-  </script>
-
   <footer>
   </footer>
 
@@ -128,6 +32,8 @@
   <script src="/assets/collections/project_list.js"></script>
   <script src="/assets/collections/user_list.js"></script>
   <script src="/assets/templates/user_list.jst.ejs"></script>
+  <script src="/assets/templates/user.jst.ejs"></script>
+  <script src="/assets/templates/project.jst.ejs"></script>
 
   <script src="/assets/views/project_view.js"></script>
   <script src="/assets/views/user_view.js"></script>
