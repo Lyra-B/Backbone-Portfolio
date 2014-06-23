@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 	def index
-		render :json => Project.all
+		render :json => Project.all.as_json(Project.default_json_options)
 	end
 
 	def create

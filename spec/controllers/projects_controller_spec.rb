@@ -3,9 +3,10 @@ require 'spec_helper'
 describe ProjectsController do
 	context "Given some projects" do
 		before do
-			3.times do 
-				Project.create(:title => Faker::Lorem.sentence, :image_url => "/image.jpg", 
+			%w(Ruby Backbone RSpec).each do |skill|
+				p = Project.create!(:title => Faker::Lorem.sentence, :image_url => "/image.jpg", 
 				:body => Faker::Lorem.words(50).join(" "))
+				p.skills << Skill.new(:name => skill)
 			end
 		end
 
@@ -18,6 +19,13 @@ describe ProjectsController do
 				expect(response.content_type).to eq("application/json")
 				expect(response.status).to eq(200)
 				expect(JSON(response.body).length).to eq(3)
+			end
+
+			it "should also fetch the associated Skills" do
+				projects = JSON(response.body)
+				skills = projects.first["skills"]		
+				expect(skills.length).to eq(1)
+				expect(skills.first["name"]).to eq("Ruby")
 			end
 		end
 
@@ -59,6 +67,7 @@ describe ProjectsController do
 				json = JSON(response.body)
 				expect(json["id"]).to_not be_nil
 				expect(json["title"]).to eq(@title)
+				expect(json["skills"]).to be
 			end).to_not raise_error
 		end
 	end

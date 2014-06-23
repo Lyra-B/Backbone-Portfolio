@@ -24,6 +24,19 @@ describe UsersController do
 			end
 		end
 
+		context "using HTML format" do
+			describe "GET to /users" do
+				before do
+					get :index
+				end
+
+				it "should give us some JSON with all the users" do
+					expect(response.content_type).to eq("text/html")
+					expect(response.status).to eq(200)					
+				end
+			end
+		end
+
 	end
 
 	describe "POST to /users" do
