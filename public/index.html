@@ -16,22 +16,6 @@
     <!-- Our views go in here -->
   </main>
 
-  <script type="text/template" id="user-list-template">
-    <section id="user-list">
-      <ul id="users">
-        <% users.each(function(user) { %>
-          <li>
-            <img src="<%= user.get('image_url') %>" alt="<%= user.get('name') %>" width=80 height=80 class="user-list-thumb" />
-            <h3><%= user.get('name') %></h3>
-            <a href="/users/<%= user.get('id') %>" data-user-id="<%= user.get('id') %>" class="profile-link">Profile</a>
-          </li>
-        <% }); %>
-      </ul>
-
-      <div class="clear"></div>
-    </section>
-  </script>
-
   <script type="text/template" id="user-template">
     <div id="bio">
       <img src="<%= image_url ? image_url : 'uploads/me.jpg' %>" width="200" height="200" alt="<%= name %>"
@@ -134,6 +118,7 @@
   <!-- Load application scripts at the end of the body, so that we
   don't slow up the loading time of the DOM -->
   <script src="/assets/libs/jquery-1.9.1.min.js"></script>
+  <script src="/assets/libs/ejs_production.js"></script>
   <script src="/assets/libs/underscore-min.js"></script>
   <script src="/assets/libs/backbone.js"></script>
   <script src="/assets/libs/backbone.localStorage-min.js"></script>
@@ -142,6 +127,7 @@
   <script src="/assets/models/user.js"></script>
   <script src="/assets/collections/project_list.js"></script>
   <script src="/assets/collections/user_list.js"></script>
+  <script src="/assets/templates/user_list.jst.ejs"></script>
 
   <script src="/assets/views/project_view.js"></script>
   <script src="/assets/views/user_view.js"></script>
