@@ -40,11 +40,28 @@ describe("A Project", function() {
   describe("Persistance in local storage", function() {
     beforeEach(function() {
       spyOn($, 'ajax');
-      project.save();
+      project.set("id", 1);
+      project.skills.add({ name: "JavaScript" });
     });
 
     it("should have an id", function() {
       expect(project.id).not.toBe(null);
+    });
+
+    it("should send skills attributes", function() {
+      var expected_params = {
+        project: {
+          title: "My amazing test project",      
+          skills_attributes: [
+            { name: "JavaScript", project_id: 1 }
+          ]
+        }
+      };
+
+      var lastAjaxArgs = $.ajax.calls[0].args[0];
+      expect(lastAjaxArgs.data).toEqual(JSON.stringify(expected_params));
+      expect(lastAjaxArgs.type).toEqual("PUT");
+      expect(lastAjaxArgs.url).toEqual("/projects/1");
     });
   });
 

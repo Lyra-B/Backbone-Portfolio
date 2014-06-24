@@ -16,7 +16,8 @@ app.views.SkillView = Backbone.View.extend({
   },
 
   removeSkill: function() {  	
-  	this.collection.remove(this.model);
+  	this.model.set("_destroy", true);
+  	this.collection.trigger("remove");
   }
 
 });

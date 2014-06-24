@@ -44,6 +44,6 @@ app.views.ProjectView = Backbone.View.extend({
   },
 
   addSkill: function(e) {
-    this.model.skills.add({});
+    this.model.skills.add({name : 'Cool Beans'});
   }
 });

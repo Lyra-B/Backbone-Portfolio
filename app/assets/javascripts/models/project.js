@@ -1,6 +1,6 @@
 app.models.Project = Backbone.Model.extend({
 
-  url: "/projects",
+  urlRoot: "/projects",
 
   initialize: function() {
   	if(!this.skills) this.skills = new app.collections.SkillList();
@@ -22,12 +22,28 @@ app.models.Project = Backbone.Model.extend({
   	var _this = this;
 
     if(!this.skills) this.skills = new app.collections.SkillList();
-
-  	_(response.skills).each(function(skill) {
-  		_this.skills.add(skill);
-  	});
-
+    this.skills.reset(response.skills, { silent: true });
+    
   	return response;
+  },
+
+  toJSON: function() {
+    var params = {};
+    params.title = this.get('title');
+    params.skills_attributes = [];
+    var _this = this;
+    this.skills.each(function(skill) {
+      var skill_info = {
+        name: skill.get('name'),
+        project_id: _this.id
+      }
+
+      if(skill.get('id')) skill_info.id = skill.get('id');
+      if(skill.get('_destroy')) skill_info["_destroy"] = true;
+      params.skills_attributes.push(skill_info);
+    });
+
+    return { project: params };
   }
 
 });

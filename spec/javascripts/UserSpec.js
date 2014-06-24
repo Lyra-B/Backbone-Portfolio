@@ -36,7 +36,7 @@ describe("A User", function() {
 			var lastAjaxCallArgs = $.ajax.calls[1].args[0];
 			expect(lastAjaxCallArgs.url).toEqual("/projects");
 			expect(lastAjaxCallArgs.type).toEqual("POST");
-			expect(lastAjaxCallArgs.data).toEqual(JSON.stringify({title: "Test", url: '/'}));
+			expect(lastAjaxCallArgs.data).toEqual(JSON.stringify({project:{title: "Test", skills_attributes: []}}));
 
 			var lastAjaxCallArgs = $.ajax.calls[2].args[0];
 			expect(lastAjaxCallArgs.url).toEqual("/users");
@@ -51,7 +51,7 @@ describe("A User", function() {
 			var lastAjaxCallArgs = $.ajax.calls[3].args[0];
 			expect(lastAjaxCallArgs.url).toEqual("/projects");
 			expect(lastAjaxCallArgs.type).toEqual("POST");
-			expect(lastAjaxCallArgs.data).toEqual(JSON.stringify({title: "My Amazing Project", url: '/'}));
+			expect(lastAjaxCallArgs.data).toEqual(JSON.stringify({project: {title: "My Amazing Project",  skills_attributes: []}}));
 		});
 
 		// it("should store the projects as well", function() {
