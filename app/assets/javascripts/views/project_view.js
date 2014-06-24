@@ -8,9 +8,25 @@ app.views.ProjectView = Backbone.View.extend({
     'change .edit-title': 'updateTitle'
   },
 
+  initialize: function() {
+    this.listenTo(this.model, "change", this.render);
+    this.listenTo(this.model.skills, "remove", this.render);
+  },
+
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
-    this.listenTo(this.model, "change", this.render);
+
+    var skill_list = this.$el.find(".skill-list");
+    var _this = this;
+    skill_list.html('');
+    this.model.skills.each(function(skill) {
+      var skill_view = new app.views.SkillView({ 
+        model: skill,
+        collection: _this.model.skills
+      });
+      skill_list.append(skill_view.render().el)
+    });
+
     return this;
   },
 
