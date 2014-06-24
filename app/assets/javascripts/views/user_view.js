@@ -7,6 +7,10 @@ app.views.UserView = Backbone.View.extend({
 		"change .edit-name": "updateName"
 	},
 
+	initialize: function() {
+		this.listenTo(this.model.projects, "reset", this.render);
+	},
+
 	render: function() {
 		// Render the user bio section
 		var _this = this;
