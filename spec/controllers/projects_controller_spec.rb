@@ -74,7 +74,11 @@ describe ProjectsController do
 
 	describe "PUT to /projects/:id" do
 		before do
+			@skill = Skill.new(:name => "Nested Attributes")
+			@php = Skill.new(:name => "PHP")
 			@project = Project.create!(:title => "My Amazing Project")
+			@project.skills << @skill
+			@project.skills << @php
 
 			params = {
 				id: @project.id,
@@ -83,7 +87,9 @@ describe ProjectsController do
 					skills_attributes: [
 						{ name: 'Ruby' },
 						{ name: 'RSpec'},
-						{ name: 'Cucumber'}
+						{ name: 'Cucumber'},
+						{ id: @skill.id, name: 'Nested Attributes Rock'},
+						{ id: @php.id, :_destroy => '1' }
 					]
 				}	
 			}
@@ -98,10 +104,18 @@ describe ProjectsController do
 		end
 
 		it "should also create associated skills" do
-			expect(@project.skills.length).to eq(3)
+			expect(@project.skills.length).to eq(4)
 			expect(@project.skills.first.name).to eq("Ruby")
 			expect(@project.skills.second.name).to eq("RSpec")
 			expect(@project.skills.third.name).to eq("Cucumber")
+		end
+
+		it "should also update associated skills" do
+			expect(@skill.reload.name).to eq("Nested Attributes Rock")
+		end
+
+		it "should also delete associated skills" do
+			expect(Skill.find_by_id(@php.id)).to be_nil
 		end
 	end
 end
