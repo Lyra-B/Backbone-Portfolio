@@ -3,9 +3,12 @@ app.views.SkillView = Backbone.View.extend({
 	tagName: 'li',
 	className: 'skill',
 	template: '<span class="name">Ruby</span><span class="delete">Remove</span>',
+	editBox: '<input type=text class=skillName placeholder="Skill Name" />',
 
 	events: {
-		'click .delete': 'removeSkill'
+		'click .delete': 'removeSkill',
+		'dblclick .name': 'editName',
+		'change .skillName': 'updateName'
 	},
 
 	render: function() {
@@ -18,6 +21,16 @@ app.views.SkillView = Backbone.View.extend({
   removeSkill: function() {  	
   	this.model.set("_destroy", true);
   	this.collection.trigger("remove");
+  },
+
+  editName: function(e) {
+  	var name = $(e.currentTarget);
+  	name.replaceWith(this.editBox).focus();
+  },
+
+  updateName: function(e) {
+  	this.model.set('name', e.currentTarget.value);
+  	this.collection.trigger("add");
   }
 
 });
