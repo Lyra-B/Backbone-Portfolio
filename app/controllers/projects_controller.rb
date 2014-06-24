@@ -8,8 +8,15 @@ class ProjectsController < ApplicationController
 		render :json => @project
 	end
 
+	def update
+		@project = Project.find(params[:id])
+		@project.update_attributes(allowed_params)
+		render :json => @project
+	end
+
 	private 
 	def allowed_params
-		params.require(:project).permit(:title, :url, :body, :image_url)
+		params.require(:project).permit(:id, :title, :url, :body, :image_url, 
+			:skills_attributes => [:id, :name])
 	end
 end

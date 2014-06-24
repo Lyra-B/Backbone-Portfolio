@@ -2,6 +2,8 @@ class Project < ActiveRecord::Base
 	belongs_to :project
 	has_many :skills
 
+	accepts_nested_attributes_for :skills
+
 	def as_json(options = nil)
 		options.merge!(Project.default_json_options) if options
 		super(options)

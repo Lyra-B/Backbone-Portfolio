@@ -71,5 +71,38 @@ describe ProjectsController do
 			end).to_not raise_error
 		end
 	end
+
+	describe "PUT to /projects/:id" do
+		before do
+			@project = Project.create!(:title => "My Amazing Project")
+
+			params = {
+				id: @project.id,
+				project: {
+					title: "Updated Project",
+					skills_attributes: [
+						{ name: 'Ruby' },
+						{ name: 'RSpec'},
+						{ name: 'Cucumber'}
+					]
+				}	
+			}
+
+			put :update, params
+
+			@project.reload
+		end
+
+		it "should update the project" do
+			expect(@project.title).to eq("Updated Project")
+		end
+
+		it "should also create associated skills" do
+			expect(@project.skills.length).to eq(3)
+			expect(@project.skills.first.name).to eq("Ruby")
+			expect(@project.skills.second.name).to eq("RSpec")
+			expect(@project.skills.third.name).to eq("Cucumber")
+		end
+	end
 end
 
