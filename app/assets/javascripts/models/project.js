@@ -4,6 +4,8 @@ app.models.Project = Backbone.Model.extend({
 
   initialize: function() {
   	if(!this.skills) this.skills = new app.collections.SkillList();
+    this.listenTo(this.skills, "add", this.save);
+    this.listenTo(this.skills, "remove", this.save);
   },
   
   validate: function() {

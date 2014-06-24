@@ -5,16 +5,18 @@ app.views.ProjectView = Backbone.View.extend({
   template: JST['templates/project'],
   events: {
     'dblclick .project-name': 'editProjectName',
-    'change .edit-title': 'updateTitle'
+    'change .edit-title': 'updateTitle',
+    'click .add-skill': 'addSkill' 
   },
 
   initialize: function() {
     this.listenTo(this.model, "change", this.render);
+    this.listenTo(this.model.skills, "add", this.render);
     this.listenTo(this.model.skills, "remove", this.render);
   },
 
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template(this.model.attributes));
 
     var skill_list = this.$el.find(".skill-list");
     var _this = this;
@@ -39,5 +41,9 @@ app.views.ProjectView = Backbone.View.extend({
     var new_title = $(e.currentTarget).val().trim();
     this.model.set('title', new_title);
     this.model.save();
+  },
+
+  addSkill: function(e) {
+    this.model.skills.add({});
   }
 });

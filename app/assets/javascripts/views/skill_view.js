@@ -2,22 +2,21 @@ app.views.SkillView = Backbone.View.extend({
 
 	tagName: 'li',
 	className: 'skill',
+	template: '<span class="name">Ruby</span><span class="delete">Remove</span>',
 
 	events: {
 		'click .delete': 'removeSkill'
 	},
 
 	render: function() {
-		this.$el.append('<span class="name">Ruby</span>'.replace('Ruby', this.model.get('name')))
-		.append('<span class="delete">Remove</span>');
+		var name = this.model.get('name');	
+		this.$el.append(this.template.replace('Ruby', name ? name : 'Edit Me'));
 
 		return this;
   },
 
-  removeSkill: function() {
-  	// this.model.destroy();
-  	// this.collection.remove(this.model);
-  	
+  removeSkill: function() {  	
+  	this.collection.remove(this.model);
   }
 
 });
