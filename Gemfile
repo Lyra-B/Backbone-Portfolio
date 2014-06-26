@@ -41,6 +41,8 @@ gem 'spring',        group: :development
 
 gem 'ejs'
 
+gem 'follow_service', :git => "git@github.com:dmgarland/follow_service.git"
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.99.0'
   gem 'faker'

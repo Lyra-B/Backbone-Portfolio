@@ -4,7 +4,13 @@
       <li>
         <img src="<%= user.get('image_url') %>" alt="<%= user.get('name') %>" width=80 height=80 class="user-list-thumb" />
         <h3><%= user.get('name') %></h3>
-        <a href="/users/<%= user.get('id') %>" data-user-id="<%= user.get('id') %>" class="profile-link">Profile</a>
+        <p>
+          <a href="/users/<%= user.id %>" data-user-id="<%= user.id %>" class="profile-link">Profile</a>
+        </p>
+
+        <p>
+          <a href="/users/<%= user.id %>/follow" data-user-id="<%= user.id %>" class="follow-link">Follow</a>
+        </p>
       </li>
     <% }); %>
   </ul>
