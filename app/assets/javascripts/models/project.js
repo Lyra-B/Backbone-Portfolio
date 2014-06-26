@@ -9,11 +9,11 @@ app.models.Project = Backbone.Model.extend({
   },
   
   validate: function() {
-    if(this.attributes.url === "" || this.attributes.url === undefined) {
-      return "URL can't be blank";
+    if(!(this.attributes.project_url)) {
+      return "Project URL can't be blank";
     };
 
-    if(this.attributes.title === "" || this.attributes.title === undefined) {
+    if(!(this.attributes.title)) {
       return "Title can't be blank";
     };
   },
@@ -22,7 +22,7 @@ app.models.Project = Backbone.Model.extend({
   	var _this = this;
 
     if(!this.skills) this.skills = new app.collections.SkillList();
-    this.skills.reset(response.skills, { silent: true });
+    this.skills.reset(response.skill_list, { silent: true });
     
   	return response;
   },

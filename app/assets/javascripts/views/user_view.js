@@ -13,20 +13,7 @@ app.views.UserView = Backbone.View.extend({
 	},
 
 	render: function() {
-		// Render the user bio section
-		var _this = this;
-		$('#user-list').slideUp(400, function() {
-			_this.showPage();
-		});
-
-		return this;
-	},
-
-	showPage: function() {
 		this.$el.html(this.template(this.model.attributes)).hide();
-
-		// Create a dummy project if there isn't one already
-	  this.createDefaultProject();
 	  
 	  // Render each project... sort of like a partial...
 	  this.model.projects.each(function(project) {
@@ -35,6 +22,8 @@ app.views.UserView = Backbone.View.extend({
 	  });
 
 		this.$el.slideDown();
+
+		return this;
 	},
 
 	editName: function(e) {

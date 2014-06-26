@@ -32,7 +32,10 @@ app.Router = Backbone.Router.extend({
 	  user.fetch({
 	  	success: function(user) {
 			  var userView = new app.views.UserView({ model: user });
-			  userView.render();
+			  
+			  $('#user-list').slideUp(400, function() {
+			  	userView.render();
+			  });
 	  	}
 	  });
 

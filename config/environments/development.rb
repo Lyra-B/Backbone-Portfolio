@@ -34,4 +34,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # TODO - move this into a YAML file or an environment variable
+  config.github_application_id = "b6be89080a680d3c2f69"
+  config.github_secret = "89cec479e139fc0f8b0eee24afe9a790c8637484"
 end

@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
 	def self.default_json_options
 		{
 			:include => { 
-				:skills => { :only => [:id, :name, :project_id] }
+				:skill_list => { :only => [:id, :name, :project_id] }
 			}, :except => [:created_at, :updated_at]
 		}
 	end

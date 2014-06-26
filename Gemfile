@@ -38,7 +38,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-
+gem 'oauth2'
 gem 'ejs'
 
 group :development, :test do

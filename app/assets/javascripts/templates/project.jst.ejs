@@ -7,13 +7,13 @@
 
   <div class="project-details">
     <h3 class="project-name">
-      <%= title %>
+      <%= title ? title : '' %>
     </h3>
 
     <input class="edit-title hidden-edit" placeholder="Enter a title">
 
-    <a href="/">
-      <%= title %>
+    <a href="<%= project_url ? project_url : '#'%>">
+      <%= title ? title : '' %> GitHub
     </a>
 
     <div class="skills">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="body">
-      <%= body %>
+      <%= body ? body : '' %>
     </div>
   </div>
 </div>
