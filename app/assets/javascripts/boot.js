@@ -21,8 +21,18 @@ $(document).ready(function() {
     body: "Click to edit"
   });
 
-  projectList.each(function(project) {
-    var view = new app.views.ProjectView({ model: project });
-    $('#project-list').append(view.render().el);
+  var projectListView = new app.views.ProjectListView({
+    collection: projectList
   });
+
+  $('#content').append(projectListView.render().el);
+
+  var user = new app.models.User({
+      firstName:"Glykeria",
+      lastName:"Peppa",
+      biography:"Junior Web Developer",
+      mission: "To become a professional developer",
+      imageUrl: "/public/uploads/me.jpg"
+    });
+
 });

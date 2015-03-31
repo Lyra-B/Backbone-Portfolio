@@ -31,11 +31,15 @@
       </div>
     </div>
 
-    <div id="projects">
+    <script type="text/template" id="project-list-template">
       <h2>Recent Project Work</h2>
 
       <div id="project-list">
       </div>
+
+
+      <div class="clear"></div>
+    </script>
 
       <script type="text/template" id="project-template">
         <div class="sortable">
@@ -100,11 +104,8 @@
         <div class="remove-project">
           Remove Project
         </div>
-
       </script>
 
-      <div class="clear"></div>
-    </div>
   </section>
 
   <section id="footer">
@@ -120,7 +121,9 @@
   <script src="../app/assets/javascripts/models/project.js"></script>
   <script src="../app/assets/javascripts/collections/project_list.js"></script>
   <script src="../app/assets/javascripts/views/project_view.js"></script>
+  <script src="../app/assets/javascripts/views/project_list_view.js"></script>
   <script src="../app/assets/javascripts/boot.js"></script>
+  <script src="../app/assets/javascripts/models/user.js"></script>
 </body>
 
 </html>
