@@ -2,6 +2,14 @@ app.models.User = Backbone.Model.extend({
 
   localStorage: new Backbone.LocalStorage('user'),
 
+  defaults: {
+    firstName: "Click to edit",
+    lastName: "Click to edit",
+    biography: "Click to edit",
+    mission: "Click to edit",
+    imageUrl: "uploads/3518a31.jpg"
+  },
+
   fullName: function() {
     return [this.get("firstName"), this.get("lastName")].join(" ");
   },

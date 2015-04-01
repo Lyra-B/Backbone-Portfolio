@@ -9,7 +9,7 @@ describe("A Project", function() {
     });
   });
 
-  it("should be able to retreive the title", function() {
+  it("should be able to retrieve the title", function() {
     expect(project.get("title")).toEqual("My amazing test project");
   });
 

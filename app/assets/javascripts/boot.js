@@ -5,6 +5,7 @@ $(document).ready(function() {
   var projectList = new app.collections.ProjectList();
   projectList.fetch();
 
+
   // Create a dummy project if there isn't one already
   if(projectList.length == 0) {
     var bucket_list = projectList.create({
@@ -21,18 +22,22 @@ $(document).ready(function() {
     body: "Click to edit"
   });
 
+  var user = new app.models.User({
+    id: 1
+  });
+
+  user.fetch();
+
+  var userView = new app.views.UserView({
+    model: user
+  });
+
+  $('#content').append(userView.render().el);
+
   var projectListView = new app.views.ProjectListView({
     collection: projectList
   });
 
   $('#content').append(projectListView.render().el);
-
-  var user = new app.models.User({
-      firstName:"Glykeria",
-      lastName:"Peppa",
-      biography:"Junior Web Developer",
-      mission: "To become a professional developer",
-      imageUrl: "/public/uploads/me.jpg"
-    });
 
 });
