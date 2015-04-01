@@ -31,7 +31,7 @@ describe("A User", function(){
   });
 
   describe("validations", function(){
-    var invalid = new app.models.User();
+    var invalid = new app.models.User({firstName:"", lastName: ""});
     it("should validate firstName", function(){
       expect(invalid.isValid()).toBeFalsy();
       expect(invalid.validationError).toMatch(/firstName can't be blank/);
@@ -41,6 +41,27 @@ describe("A User", function(){
       expect(invalid.isValid()).toBeFalsy();
       expect(invalid.validationError).toMatch(/lastName can't be blank/);
     });
+  });
+
+  describe("projects", function(){
+    beforeEach(function(){
+      user.save();
+      user.projects.create({
+        title: "My Amazing Project",
+        url: "project.jpeg"
+      });
+    });
+
+    afterEach(function(){
+      localStorage.clear();
+    });
+
+    it("should save the associated project", function() {
+      var savedUser = new app.models.User({ id: user.id });
+      savedUser.fetch();
+
+      expect(savedUser.projects.length).toBe(1);
+    })
   });
 
 

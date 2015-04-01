@@ -1,6 +1,6 @@
 app.models.User = Backbone.Model.extend({
 
-  localStorage: new Backbone.LocalStorage('user'),
+  localStorage: new Backbone.LocalStorage('users'),
 
   defaults: {
     firstName: "Click to edit",
@@ -8,6 +8,19 @@ app.models.User = Backbone.Model.extend({
     biography: "Click to edit",
     mission: "Click to edit",
     imageUrl: "uploads/3518a31.jpg"
+  },
+
+  initialize: function() {
+    this.projects = new app.collections.ProjectList();
+    this.projects.user = this;
+    this.bind("sync", this.fetchProjects);
+  },
+
+  fetchProjects: function() {
+    if(this.id){
+      this.projects.fetch();
+      this.projects.reset(this.projects.where({user_id: this.id}));
+    }
   },
 
   fullName: function() {
