@@ -7,7 +7,7 @@ app.models.User = Backbone.Model.extend({
     lastName: "Click to edit",
     biography: "Click to edit",
     mission: "Click to edit",
-    imageUrl: "uploads/3518a31.jpg"
+    imageUrl: "uploads/images.png"
   },
 
   initialize: function() {
@@ -20,6 +20,11 @@ app.models.User = Backbone.Model.extend({
     if(this.id){
       this.projects.fetch();
       this.projects.reset(this.projects.where({user_id: this.id}));
+      this.projects.add({
+        title: "New Project",
+        url: "Click to edit",
+        body: "Click to edit"
+      });
     }
   },
 

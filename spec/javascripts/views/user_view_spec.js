@@ -2,7 +2,8 @@
 //   var view;
 
 //   beforeEach(function() {
-//     view = new app.views.userView({});
+
+//     view = new app.views.UserView({ model: user });
 //   });
 
 //   describe("render function", function(){
@@ -13,7 +14,7 @@
 
 //   it("should create a div with a class user", function(){
 //     expect(view.el.nodeName).toEqual("DIV");
-//     expect(view.el.id).toEqual("bio");
+//     expect(view.el.id).toEqual("bio-template");
 //     expect(view.el.getAttribute("class")).toEqual("user");
 //   });
 
@@ -26,4 +27,4 @@
 //   });
 
 
-});
+// });

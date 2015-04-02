@@ -1,25 +1,41 @@
 app.views.UserView = Backbone.View.extend({
   tagName: "div",
-  id: "bio",
-  template: _.template($('#bio').html()),
+  id: "user",
+  template: _.template($('#bio-template').html()),
   events: {
-    'dblclick .name': 'editName',
+    'dblclick .first': 'editName',
     'change .edit-name': 'updateName',
+    'dblclick .last': 'editLastName',
+    'change .edit-lastname': 'updateLastName',
     'dblclick .bio': 'editBio',
     'change .edit-bio': 'updateBio',
     'dblclick .mission': 'editMission',
-    'change .edit-mission': 'updateMission'
+    'change .edit-mission': 'updateMission',
+    'dblclick .bio-image': 'editImage',
+    'change .edit-image': 'updateImage'
   },
 
   render: function() {
-    this.$el.html(this.template(this.model.toJSON()));
+    this.$el.html(this.template({user: this.model}));
     this.listenTo(this.model, "change", this.render);
+    var projectListView = new app.views.ProjectListView({
+      collection: this.model.projects
+    });
+
+    this.$el.append(projectListView.render().el);
     return this;
   },
 
   editName: function() {
     this.$el.addClass('editing');
-    this.$el.find('.edit-name').show().focus().prev('h1').hide();
+    this.$el.find('.edit-name').show().focus();
+    this.$el.find('.first').hide();
+  },
+
+  editLastName: function() {
+    this.$el.addClass('editing');
+    this.$el.find('.edit-lastname').show().focus();
+    this.$el.find('.last').hide();
   },
 
   editBio: function() {
@@ -32,9 +48,20 @@ app.views.UserView = Backbone.View.extend({
     this.$el.find('.edit-mission').show().focus().prev('h3').hide();
   },
 
+  editImage: function() {
+    this.$el.addClass('editing');
+    this.$el.find('.edit-image').show().focus().prev('img').hide();
+  },
+
   updateName: function(e) {
     var new_name = $(e.currentTarget).val().trim();
     this.model.set('firstName', new_name);
+    this.model.save();
+  },
+
+  updateLastName: function(e) {
+    var new_lastname = $(e.currentTarget).val().trim();
+    this.model.set('lastName', new_lastname);
     this.model.save();
   },
 
@@ -48,5 +75,12 @@ app.views.UserView = Backbone.View.extend({
     var new_mission = $(e.currentTarget).val().trim();
     this.model.set('mission', new_mission);
     this.model.save();
+  },
+
+  updateImage: function(e) {
+    var new_image = $(e.currentTarget).val().trim();
+    this.model.set('imageUrl', new_image);
+    this.model.save();
   }
 });
+

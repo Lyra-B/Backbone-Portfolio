@@ -14,23 +14,33 @@
 
   <section id="content">
 
-    <script type="text/template" id="bio">
-      <img src="<%= imageUrl %>" width="200" height="200" alt="Glykeria Peppa"
-      class="bio-image shadowed" />
+    <script type="text/template" id="user-list-template">
+      <% users.each(function(user) { %>
+        <li class="user" data-id= "<%= user.attributes.id %>"><%= user.fullName() %></li>
+      <% }); %>
+      <button class="newUserButton">Create a new user</button>
+    </script>
 
-      <div class="bio-text">
-        <h1 class="name"><%= firstName %> <%= lastName %></h1>
-        <input class="edit-name hidden-edit" placeholder="Enter your name">
+    <script type="text/template" id="bio-template">
+      <div id="bio">
+        <img src="<%= user.attributes.imageUrl %>" width="200" height="200" alt="<%= user.fullName() %>" class="bio-image shadowed" />
+        <input class="edit-image hidden-edit" placeholder="Enter your image path">
 
-        <h2 class="bio">
-          <%= biography %>
-        </h2>
-        <input class="edit-bio hidden-edit" placeholder="Enter your bio">
+        <div class="bio-text">
+          <h1 class="name"><span class="first"><%= user.attributes.firstName %></span> <span class="last"><%= user.attributes.lastName %></span></h1>
+          <input class="edit-name hidden-edit" placeholder="Enter your name">
+          <input class="edit-lastname hidden-edit" placeholder="Enter your last name">
 
-        <h3 class="mission">
-          <%= mission %>
-        </h3>
-        <input class="edit-mission hidden-edit" placeholder="Enter your mission">
+          <h2 class="bio">
+            <%= user.attributes.biography %>
+          </h2>
+          <input class="edit-bio hidden-edit" placeholder="Enter your bio">
+
+          <h3 class="mission">
+            <%= user.attributes.mission %>
+          </h3>
+          <input class="edit-mission hidden-edit" placeholder="Enter your mission">
+        </div>
       </div>
     </script>
 
@@ -59,9 +69,12 @@
 
             <input class="edit-title hidden-edit" placeholder="Enter a title">
 
-            <a href="<%= url %>">
+            <p class="url">
               <%= url %>
-            </a>
+            </p>
+            <a href="<%= url %>">Visit</a>
+
+            <input class="edit-url hidden-edit" placeholder="Enter a url">
 
             <div class="skills">
               <span class="skill-label">
@@ -101,6 +114,8 @@
             <div class="body">
               <%= body %>
             </div>
+
+            <input class="edit-body hidden-edit" placeholder="Enter a body">
           </div>
         </div>
 
@@ -121,13 +136,17 @@
   <script src="../app/assets/javascripts/libs/backbone.js"></script>
   <script src="../app/assets/javascripts/libs/backbone.localStorage-min.js"></script>
   <script src="../app/assets/javascripts/app.js"></script>
+  <script src="../app/assets/javascripts/models/user.js"></script>
   <script src="../app/assets/javascripts/models/project.js"></script>
   <script src="../app/assets/javascripts/collections/project_list.js"></script>
+  <script src="../app/assets/javascripts/collections/user_list.js"></script>
   <script src="../app/assets/javascripts/views/project_view.js"></script>
   <script src="../app/assets/javascripts/views/project_list_view.js"></script>
   <script src="../app/assets/javascripts/views/user_view.js"></script>
+  <script src="../app/assets/javascripts/views/user_list_view.js"></script>
+  <script src="../app/assets/javascripts/routes.js"></script>
   <script src="../app/assets/javascripts/boot.js"></script>
-  <script src="../app/assets/javascripts/models/user.js"></script>
+
 </body>
 
 </html>

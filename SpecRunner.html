@@ -6,6 +6,12 @@
 
   <link rel="shortcut icon" type="image/png" href="lib/jasmine-1.3.1/jasmine_favicon.png">
   <link rel="stylesheet" type="text/css" href="lib/jasmine-1.3.1/jasmine.css">
+
+  <script type="text/template" id="user-list-template">
+    <% users.each(function(user) { %>
+      <li class="user"><%= new app.models.User(user).fullName() %></li>
+    <% }); %>
+  </script>
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>
 
@@ -16,16 +22,14 @@
   <script src="app/assets/javascripts/libs/backbone.localStorage-min.js"></script>
   <script type="text/javascript" src="app/assets/javascripts/app.js"></script>
   <script type="text/javascript" src="app/assets/javascripts/models/project.js"></script>
-  <script type="text/javascript" src="app/assets/javascripts/collections/project_list.js"></script>
   <script type="text/javascript" src="app/assets/javascripts/models/user.js"></script>
+  <script type="text/javascript" src="app/assets/javascripts/collections/project_list.js"></script>
+  <script type="text/javascript" src="app/assets/javascripts/collections/user_list.js"></script>
+  <script type="text/javascript" src="app/assets/javascripts/views/user_view.js"></script>
+  <script type="text/javascript" src="app/assets/javascripts/views/user_list_view.js"></script>
 
   <!-- include spec files here... -->
-  <script type="text/javascript" src="spec/javascripts/SpecHelper.js"></script>
-  <script type="text/javascript" src="spec/javascripts/ProjectSpec.js"></script>
-  <script type="text/javascript" src="spec/javascripts/models/user_spec.js"></script>
-  <script type="text/javascript" src="spec/javascripts/views/user_view_spec.js"></script>
-
-
+  <script type="text/javascript" src="spec/javascripts/views/user_list_view_spec.js"></script>
 
   <script type="text/javascript">
     (function() {
