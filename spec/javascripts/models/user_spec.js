@@ -54,7 +54,7 @@ describe("A User", function(){
         url: "project.jpeg"
       });
 
-      var someOneElse = new app.models.User({
+      someOneElse = new app.models.User({
         firstName: "blah",
         lastName: "blah"
       });
@@ -93,18 +93,4 @@ describe("A User", function(){
       expect(secondUserSaveArgs.data).toEqual(JSON.stringify(someOneElse.projects.first));
     });
   });
-
-  //   describe("fetching user", function(){
-  //     runs(function(){
-  //       var savedUser = new app.models.User({ id: user.id });
-  //       savedUser.fetch();
-  //     });
-
-  //     waitsFor(function() {
-  //       // Hang around for two seconds whilst Rails goes and fetches tha data
-  //     }, "The user should be loaded, 2000"
-  //     })
-
-  //   })
-
 });
