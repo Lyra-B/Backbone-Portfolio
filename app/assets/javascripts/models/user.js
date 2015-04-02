@@ -1,6 +1,6 @@
 app.models.User = Backbone.Model.extend({
 
-  url: '/users',
+  urlRoot: '/users',
 
   defaults: {
     firstName: "Click to edit",
@@ -41,5 +41,30 @@ app.models.User = Backbone.Model.extend({
       errors.push("lastName can't be blank");
     }
     return errors.length ? errors : undefined;
+  },
+
+  toJSON: function() {
+    var params = {
+      user: {
+        first_name: this.get('firstName'),
+        last_name: this.get('lastName'),
+        biography: this.get('biography'),
+        mission: this.get('mission'),
+        image_url: this.get('imageUrl')
+      }
+    };
+
+    return params;
+  },
+
+  parse: function(response){
+    return{
+      id: response.id,
+      firstName: response.first_name,
+      lastName: response.last_name,
+      biography: response.biography,
+      mission: response.mission,
+      imageUrl: response.image_url
+    };
   }
 });

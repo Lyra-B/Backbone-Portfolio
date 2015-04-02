@@ -25,6 +25,4 @@ app.views.UserListView = Backbone.View.extend({
     router.navigate("users/newUser", { trigger: true, replace: true});
   }
 
-
-
 });

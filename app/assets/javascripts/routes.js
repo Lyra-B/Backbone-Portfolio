@@ -9,10 +9,16 @@ app.Router = Backbone.Router.extend({
 
   userIndex: function() {
     var users = new app.collections.UserList();
-    users.fetch();
 
-    var userList = new app.views.UserListView({ collection: users });
-    $('#content').html(userList.render().el);
+    users.fetch({
+      success: function(api_users) {
+        var userList = new app.views.UserListView({ collection: api_users });
+        $('#content').html(userList.render().el);
+      },
+      error: function() {
+        console.log("Sorry!");
+      }
+    });
   },
 
   userShow: function(id) {
@@ -20,10 +26,15 @@ app.Router = Backbone.Router.extend({
       id: id
     });
 
-    user.fetch();
-
-    var userView = new app.views.UserView({ model: user });
-    $('#content').html(userView.render().el);
+    user.fetch({
+      success: function(api_user) {
+        var userView = new app.views.UserView({ model: api_user });
+        $('#content').html(userView.render().el);
+      },
+      error: function() {
+        console.log("Sorry!")
+      }
+    });
   },
 
   userNew: function() {
