@@ -1,5 +1,6 @@
 describe("A User", function(){
   var user;
+  var someOneElse;
 
   beforeEach(function(){
     user = new app.models.User({
@@ -45,24 +46,65 @@ describe("A User", function(){
 
   describe("projects", function(){
     beforeEach(function(){
+      spyOn($, "ajax");
+
       user.save();
       user.projects.create({
         title: "My Amazing Project",
         url: "project.jpeg"
       });
+
+      var someOneElse = new app.models.User({
+        firstName: "blah",
+        lastName: "blah"
+      });
+      someOneElse.save;
+      someOneElse.projects.create({
+        title: "My second Project",
+        url: "project2.jpeg"
+      });
     });
 
-    afterEach(function(){
-      localStorage.clear();
+    it("should save the first user via AJAX", function(){
+      var firstUserSaveArgs = $.ajax.calls[0].args[0];
+      expect(firstUserSaveArgs.url).toEqual("/users");
+      expect(firstUserSaveArgs.type).toEqual("POST");
+      expect(firstUserSaveArgs.data).toEqual(JSON.stringify(user.attributes));
     });
 
-    it("should save the associated project", function() {
-      var savedUser = new app.models.User({ id: user.id });
-      savedUser.fetch();
+    it("should save the first project via AJAX", function(){
+      var firstProjectSaveArgs = $.ajax.calls[1].args[0];
+      expect(firstUserSaveArgs.url).toEqual("/projects");
+      expect(firstUserSaveArgs.type).toEqual("POST");
+      expect(firstUserSaveArgs.data).toEqual(JSON.stringify(user.projects.first));
+    });
 
-      expect(savedUser.projects.length).toBe(2);
-    })
+    it("should save the second user via AJAX", function(){
+      var secondUserSaveArgs = $.ajax.calls[2].args[0];
+      expect(secondUserSaveArgs.url).toEqual("/users");
+      expect(secondUserSaveArgs.type).toEqual("POST");
+      expect(secondUserSaveArgs.data).toEqual(JSON.stringify(someOneElse.attributes));
+    });
+
+    it("should save the second project via AJAX", function(){
+      var secondProjectSaveArgs = $.ajax.calls[3].args[0];
+      expect(secondUserSaveArgs.url).toEqual(?);
+      expect(secondUserSaveArgs.type).toEqual(?);
+      expect(secondUserSaveArgs.data).toEqual(JSON.stringify(someOneElse.projects.first));
+    });
   });
 
+  //   describe("fetching user", function(){
+  //     runs(function(){
+  //       var savedUser = new app.models.User({ id: user.id });
+  //       savedUser.fetch();
+  //     });
+
+  //     waitsFor(function() {
+  //       // Hang around for two seconds whilst Rails goes and fetches tha data
+  //     }, "The user should be loaded, 2000"
+  //     })
+
+  //   })
 
 });

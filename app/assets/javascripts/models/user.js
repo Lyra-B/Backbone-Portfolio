@@ -1,6 +1,6 @@
 app.models.User = Backbone.Model.extend({
 
-  localStorage: new Backbone.LocalStorage('users'),
+  url: '/users',
 
   defaults: {
     firstName: "Click to edit",
