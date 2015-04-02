@@ -56,9 +56,12 @@ describe("A User", function(){
 
       someOneElse = new app.models.User({
         firstName: "blah",
-        lastName: "blah"
+        lastName: "blah",
+        biography: "blah",
+        mission: "blah",
+        imageUrl: "blah"
       });
-      someOneElse.save;
+      someOneElse.save();
       someOneElse.projects.create({
         title: "My second Project",
         url: "project2.jpeg"
@@ -69,28 +72,54 @@ describe("A User", function(){
       var firstUserSaveArgs = $.ajax.calls[0].args[0];
       expect(firstUserSaveArgs.url).toEqual("/users");
       expect(firstUserSaveArgs.type).toEqual("POST");
-      expect(firstUserSaveArgs.data).toEqual(JSON.stringify(user.attributes));
+      expect(firstUserSaveArgs.data).toEqual(JSON.stringify({
+        user: {first_name:"Glykeria",
+          last_name:"Peppa",
+          biography:"Junior Web Developer",
+          mission: "To become a professional developer",
+          image_url: "/public/uploads/me.jpg"
+        }
+      }));
     });
 
     it("should save the first project via AJAX", function(){
       var firstProjectSaveArgs = $.ajax.calls[1].args[0];
-      expect(firstUserSaveArgs.url).toEqual("/projects");
-      expect(firstUserSaveArgs.type).toEqual("POST");
-      expect(firstUserSaveArgs.data).toEqual(JSON.stringify(user.projects.first));
+      expect(firstProjectSaveArgs.url).toEqual("/projects");
+      expect(firstProjectSaveArgs.type).toEqual("POST");
+      expect(firstProjectSaveArgs.data).toEqual(JSON.stringify({
+          project: {
+          title:"My Amazing Project",
+          url: "project.jpeg",
+          user_id: user.id
+        }
+      }));
     });
 
     it("should save the second user via AJAX", function(){
       var secondUserSaveArgs = $.ajax.calls[2].args[0];
       expect(secondUserSaveArgs.url).toEqual("/users");
       expect(secondUserSaveArgs.type).toEqual("POST");
-      expect(secondUserSaveArgs.data).toEqual(JSON.stringify(someOneElse.attributes));
+      expect(secondUserSaveArgs.data).toEqual(JSON.stringify({
+        user: {
+          first_name: "blah",
+          last_name: "blah",
+          biography: "blah",
+          mission: "blah",
+          image_url: "blah"
+        }}));
     });
 
     it("should save the second project via AJAX", function(){
       var secondProjectSaveArgs = $.ajax.calls[3].args[0];
-      expect(secondUserSaveArgs.url).toEqual(?);
-      expect(secondUserSaveArgs.type).toEqual(?);
-      expect(secondUserSaveArgs.data).toEqual(JSON.stringify(someOneElse.projects.first));
+      expect(secondProjectSaveArgs.url).toEqual("/projects");
+      expect(secondProjectSaveArgs.type).toEqual("POST");
+      expect(secondProjectSaveArgs.data).toEqual(JSON.stringify({
+          project: {
+          title:"My second Project",
+          url: "project2.jpeg",
+          user_id: someOneElse.id
+        }
+      }));
     });
   });
 });
