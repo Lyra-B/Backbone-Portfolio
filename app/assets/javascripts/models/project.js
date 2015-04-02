@@ -1,5 +1,7 @@
 app.models.Project = Backbone.Model.extend({
 
+  url: "coolBeans",
+
   // localStorage: new Backbone.LocalStorage('portfolio'),
 
   validate: function() {

@@ -1,6 +1,7 @@
 app.views.UserView = Backbone.View.extend({
   tagName: "div",
   id: "user",
+  className: "user",
   template: _.template($('#bio-template').html()),
   events: {
     'dblclick .first': 'editName',

@@ -1,30 +1,38 @@
-// describe("user view", function(){
-//   var view;
+describe("user view", function(){
+  var view;
 
-//   beforeEach(function() {
+  beforeEach(function() {
 
-//     view = new app.views.UserView({ model: user });
-//   });
+    var user = new app.models.User({
+      firstName:"Glykeria",
+      lastName:"Peppa",
+      biography:"Junior Web Developer",
+      mission: "To become a professional developer",
+      imageUrl: "/public/uploads/me.jpg"
+    });
 
-//   describe("render function", function(){
-//     beforeEach(function() {
-//       view.render();
-//     })
-//   });
+    view = new app.views.UserView({ model: user });
+  });
 
-//   it("should create a div with a class user", function(){
-//     expect(view.el.nodeName).toEqual("DIV");
-//     expect(view.el.id).toEqual("bio-template");
-//     expect(view.el.getAttribute("class")).toEqual("user");
-//   });
+  describe("render function", function(){
+    beforeEach(function() {
+      view.render();
+    })
 
-//   it("should render the user template", function() {
-//     expect(view.$el.find(".bio-text").length).toBeGreaterThan(0);
-//   });
+    it("should create a div with a class user", function(){
+      expect(view.el.nodeName).toEqual("DIV");
+      expect(view.el.id).toEqual("user");
+      expect(view.el.getAttribute("class")).toEqual("user");
+    });
 
-//   it("should should return the view", function(){
-//     expect(view.render()).toEqual(view)
-//   });
+    it("should render the user template", function() {
+      expect(view.$el.find(".bio-text").length).toBeGreaterThan(0);
+    });
+
+    it("should should return the view", function(){
+      expect(view.render()).toEqual(view)
+    });
+  });
 
 
-// });
+});
