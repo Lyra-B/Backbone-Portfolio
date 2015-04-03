@@ -16,6 +16,11 @@ class UsersController < ApplicationController
     render :json => User.find(params[:id])
   end
 
+  def update
+    user = User.find(params[:id])
+    user.update(allowed_params)
+  end
+
   private
   def allowed_params
     params.require(:user).permit(:first_name, :last_name, :biography, :mission, :image_url)
