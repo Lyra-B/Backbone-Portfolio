@@ -1,6 +1,6 @@
 app.models.Project = Backbone.Model.extend({
 
-  url: '/projects',
+  urlRoot: '/projects',
 
   validate: function() {
     if(this.attributes.url === "" || this.attributes.url === undefined) {

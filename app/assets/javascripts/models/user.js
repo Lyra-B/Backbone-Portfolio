@@ -16,10 +16,16 @@ app.models.User = Backbone.Model.extend({
     this.bind("sync", this.fetchProjects);
   },
 
+
   fetchProjects: function() {
+    var _this = this
     if(this.id){
-      this.projects.fetch();
-      this.projects.reset(this.projects.where({user_id: this.id}));
+      this.projects.fetch({
+        success: function(projects){
+          console.log("Get to projects");
+          _this.projects.reset(_this.projects.where({user_id: _this.id}));
+        }
+      });
       this.projects.add({
         title: "New Project",
         url: "Click to edit",

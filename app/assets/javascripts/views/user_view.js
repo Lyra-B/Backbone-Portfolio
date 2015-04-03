@@ -16,7 +16,13 @@ app.views.UserView = Backbone.View.extend({
     'change .edit-image': 'updateImage'
   },
 
+  initialize: function(){
+    this.listenTo(this.model, "change", this.render);
+    this.listenTo(this.model.projects, "reset", this.render);
+  },
+
   render: function() {
+    console.log("render user view")
     this.$el.html(this.template({user: this.model}));
     this.listenTo(this.model, "change", this.render);
     var projectListView = new app.views.ProjectListView({
