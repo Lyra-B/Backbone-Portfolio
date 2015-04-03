@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.update(allowed_params)
+    render nothing: true
   end
 
   private

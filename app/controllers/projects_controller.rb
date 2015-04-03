@@ -11,13 +11,18 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    # @user = User.find(params[:user_id])
     render :json => Project.where(:user_id => params[:user_id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @project = Project.update(allowed_params)
+    render nothing: true
   end
 
   private
   def allowed_params
-    params.require(:project).permit(:title, :url, :user_id)
+    params.require(:project).permit(:title, :body, :image_url, :url, :user_id)
   end
 
 end
