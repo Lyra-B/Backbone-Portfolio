@@ -15,8 +15,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-    @project = Project.update(allowed_params)
+    @project = Project.find(params[:id])
+    @project.update(allowed_params)
     render nothing: true
   end
 
