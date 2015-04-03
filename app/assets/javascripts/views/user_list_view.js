@@ -2,7 +2,7 @@ app.views.UserListView = Backbone.View.extend({
 
   tagName: "ol",
   id: "user-list",
-  template: _.template($('#user-list-template').html()),
+  template: JST['templates/user_list_view'],
   events: {
     'click .user' : 'showUser',
     'click .newUserButton' : 'newUser'

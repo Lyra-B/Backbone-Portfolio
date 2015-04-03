@@ -1,0 +1,20 @@
+<div id="bio">
+  <img src="<%= user.attributes.imageUrl %>" width="200" height="200" alt="<%= user.fullName() %>" class="bio-image shadowed" />
+  <input class="edit-image hidden-edit" placeholder="Enter your image path">
+
+  <div class="bio-text">
+    <h1 class="name"><span class="first"><%= user.attributes.firstName %></span> <span class="last"><%= user.attributes.lastName %></span></h1>
+    <input class="edit-name hidden-edit" placeholder="Enter your name">
+    <input class="edit-lastname hidden-edit" placeholder="Enter your last name">
+
+    <h2 class="bio">
+      <%= user.attributes.biography %>
+    </h2>
+    <input class="edit-bio hidden-edit" placeholder="Enter your bio">
+
+    <h3 class="mission">
+      <%= user.attributes.mission %>
+    </h3>
+    <input class="edit-mission hidden-edit" placeholder="Enter your mission">
+  </div>
+</div>

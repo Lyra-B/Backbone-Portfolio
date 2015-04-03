@@ -2,7 +2,7 @@ app.views.ProjectView = Backbone.View.extend({
 
   tagName: 'div',
   className: 'project',
-  template: _.template($('#project-template').html()),
+  template: JST['templates/project'],
   events: {
     'dblclick .project-name': 'editProjectName',
     'change .edit-title': 'updateTitle',
@@ -10,6 +10,8 @@ app.views.ProjectView = Backbone.View.extend({
     'change .edit-url': 'updateUrl',
     'dblclick .body': 'editBody',
     'change .edit-body': 'updateBody',
+    'dblclick .project-image': 'editImage',
+    'change .edit-image': 'updateImage',
     'click .remove-project': 'removeProject'
   },
 
@@ -40,11 +42,15 @@ app.views.ProjectView = Backbone.View.extend({
     this.$el.find('.edit-body').show().focus().prev('.body').hide();
   },
 
+  editImage: function() {
+    this.$el.addClass('editing');
+    this.$el.find('.edit-image').show().focus().prev('img').hide();
+  },
+
   updateTitle: function(e) {
     var new_title = $(e.currentTarget).val().trim();
     this.model.set('title', new_title);
     this.model.save();
-    this.model.user.fetchProjects();
   },
 
   updateUrl: function(e) {
@@ -56,6 +62,12 @@ app.views.ProjectView = Backbone.View.extend({
   updateBody: function(e) {
     var new_body = $(e.currentTarget).val().trim();
     this.model.set('body', new_body);
+    this.model.save();
+  },
+
+  updateImage: function(e) {
+    var new_image = $(e.currentTarget).val().trim();
+    this.model.set('imageUrl', new_image);
     this.model.save();
   },
 

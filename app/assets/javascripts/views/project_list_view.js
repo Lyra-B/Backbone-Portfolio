@@ -1,7 +1,7 @@
 app.views.ProjectListView = Backbone.View.extend({
   tagName: "div",
   id: "projects",
-  template: _.template($('#project-list-template').html()),
+  template: JST['templates/project_list'],
 
   render: function() {
     this.$el.html(this.template());
