@@ -95,6 +95,7 @@ app.views.UserView = Backbone.View.extend({
 
   projectNew: function(e) {
     this.model.projects.add({
+      userId: this.model.id,
       title: "New Project",
       url: "Click to edit",
       body: "Click to edit",
