@@ -26,11 +26,6 @@ app.models.User = Backbone.Model.extend({
           _this.projects.reset(_this.projects.models);
         }
       });
-      this.projects.add({
-        title: "New Project",
-        url: "Click to edit",
-        body: "Click to edit"
-      });
     }
   },
 

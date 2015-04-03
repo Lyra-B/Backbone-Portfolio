@@ -16,10 +16,25 @@ app.models.Project = Backbone.Model.extend({
     var params = {
       project: {
         title: this.get('title'),
-        url: this.get('url')
+        body: this.get('body'),
+        url: this.get('url'),
+        image_url: this.get('imageUrl'),
+        user_id: this.get('userId')
       }
     };
     return params;
+  },
+
+
+  parse: function(response){
+    return{
+      id: response.id,
+      userId: response.user_id,
+      title: response.title,
+      body: response.body,
+      url: response.url,
+      imageUrl: response.image_url
+    };
   }
 
 });
