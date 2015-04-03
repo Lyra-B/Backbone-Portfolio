@@ -13,12 +13,15 @@ app.views.UserView = Backbone.View.extend({
     'dblclick .mission': 'editMission',
     'change .edit-mission': 'updateMission',
     'dblclick .bio-image': 'editImage',
-    'change .edit-image': 'updateImage'
+    'change .edit-image': 'updateImage',
+    'click .newProject': 'projectNew'
   },
 
   initialize: function(){
     this.listenTo(this.model, "change", this.render);
     this.listenTo(this.model.projects, "reset", this.render);
+    this.listenTo(this.model.projects, "add", this.render);
+
   },
 
   render: function() {
@@ -88,6 +91,15 @@ app.views.UserView = Backbone.View.extend({
     var new_image = $(e.currentTarget).val().trim();
     this.model.set('imageUrl', new_image);
     this.model.save();
+  },
+
+  projectNew: function(e) {
+    this.model.projects.add({
+      title: "New Project",
+      url: "Click to edit",
+      body: "Click to edit",
+      imageUrl: "uploads/images.png"
+    });
   }
 });
 
