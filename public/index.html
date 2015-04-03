@@ -13,117 +13,6 @@
   </section>
 
   <section id="content">
-
-    <script type="text/template" id="user-list-template">
-      <% users.each(function(user) { %>
-        <li class="user" data-id= "<%= user.attributes.id %>"><%= user.fullName() %></li>
-      <% }); %>
-      <button class="newUserButton">Create a new user</button>
-    </script>
-
-    <script type="text/template" id="bio-template">
-      <div id="bio">
-        <img src="<%= user.attributes.imageUrl %>" width="200" height="200" alt="<%= user.fullName() %>" class="bio-image shadowed" />
-        <input class="edit-image hidden-edit" placeholder="Enter your image path">
-
-        <div class="bio-text">
-          <h1 class="name"><span class="first"><%= user.attributes.firstName %></span> <span class="last"><%= user.attributes.lastName %></span></h1>
-          <input class="edit-name hidden-edit" placeholder="Enter your name">
-          <input class="edit-lastname hidden-edit" placeholder="Enter your last name">
-
-          <h2 class="bio">
-            <%= user.attributes.biography %>
-          </h2>
-          <input class="edit-bio hidden-edit" placeholder="Enter your bio">
-
-          <h3 class="mission">
-            <%= user.attributes.mission %>
-          </h3>
-          <input class="edit-mission hidden-edit" placeholder="Enter your mission">
-        </div>
-      </div>
-    </script>
-
-    <script type="text/template" id="project-list-template">
-      <h2>Recent Project Work</h2>
-
-      <div id="project-list">
-      </div>
-
-
-      <div class="clear"></div>
-    </script>
-
-      <script type="text/template" id="project-template">
-        <div class="sortable">
-        </div>
-
-        <div class="info">
-          <img src="uploads/project.jpg" width="350" height="165"
-          alt="My Amazing Project" class="project-image shadowed" />
-
-          <div class="project-details">
-            <h3 class="project-name">
-              <%= title %>
-            </h3>
-
-            <input class="edit-title hidden-edit" placeholder="Enter a title">
-
-            <p class="url">
-              <%= url %>
-            </p>
-            <a href="<%= url %>">Visit</a>
-
-            <input class="edit-url hidden-edit" placeholder="Enter a url">
-
-            <div class="skills">
-              <span class="skill-label">
-                Skills:
-              </span>
-
-              <ul class="skill-list">
-                <li class="skill">
-                  <span class="name">Ruby</span>
-                  <span class="delete">Remove</span>
-                </li>
-                <li class="skill">
-                  <span class="name">Rails</span>
-                  <span class="delete">Remove</span>
-                </li>
-                <li class="skill">
-                  <span class="name">AJAX</span>
-                  <span class="delete">Remove</span>
-                </li>
-                <li class="skill">
-                  <span class="name">HTML 5</span>
-                  <span class="delete">Remove</span>
-                </li>
-                <li class="skill">
-                  <span class="name">CSS</span>
-                  <span class="delete">Remove</span>
-                </li>
-                <li class="skill">
-                  <span class="name">Javascript</span>
-                  <span class="delete">Remove</span>
-                </li>
-              </ul>
-
-              <span class="add-skill">Add Skill</span>
-            </div>
-
-            <div class="body">
-              <%= body %>
-            </div>
-
-            <input class="edit-body hidden-edit" placeholder="Enter a body">
-          </div>
-        </div>
-
-        <div class="remove-project">
-          Remove Project
-        </div>
-      </script>
-
   </section>
 
   <section id="footer">
@@ -131,20 +20,7 @@
 
   <!-- Load application scripts at the end of the body, so that we
   don't slow up the loading time of the DOM -->
-  <script src="/assets/libs/jquery-1.9.1.min.js"></script>
-  <script src="/assets/libs/underscore-min.js"></script>
-  <script src="/assets/libs/backbone.js"></script>
-  <script src="/assets/app.js"></script>
-  <script src="/assets/models/user.js"></script>
-  <script src="/assets/models/project.js"></script>
-  <script src="/assets/collections/project_list.js"></script>
-  <script src="/assets/collections/user_list.js"></script>
-  <script src="/assets/views/project_view.js"></script>
-  <script src="/assets/views/project_list_view.js"></script>
-  <script src="/assets/views/user_view.js"></script>
-  <script src="/assets/views/user_list_view.js"></script>
-  <script src="/assets/routes.js"></script>
-  <script src="/assets/boot.js"></script>
+  <script src="/assets/application.js"></script>
 
 </body>
 
