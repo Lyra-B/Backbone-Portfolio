@@ -26,7 +26,7 @@ RSpec.describe ProjectsController, type: :controller do
 
   describe("POST to create") do
     before do
-      @user = User.create(:id => 1, :first_name => "Glykeria", :last_name => "Peppa")
+      @user = User.create!(:first_name => "Glykeria", :last_name => "Peppa")
       params = {
         project: {
           title:"Blah",
@@ -46,6 +46,10 @@ RSpec.describe ProjectsController, type: :controller do
     it("should return a valid JSON") do
       expect(response.status).to eq(201)
       expect(response.content_type).to eq("application/json")
+    end
+
+    it("should set the user id") do
+      expect(assigns[:project].user_id).to eq(@user.id)
     end
   end
 end

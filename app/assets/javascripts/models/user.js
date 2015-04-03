@@ -23,7 +23,7 @@ app.models.User = Backbone.Model.extend({
       this.projects.fetch({
         success: function(projects){
           console.log("Get to projects");
-          _this.projects.reset(_this.projects.where({user_id: _this.id}));
+          _this.projects.reset(_this.projects.models);
         }
       });
       this.projects.add({

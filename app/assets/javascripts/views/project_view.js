@@ -19,7 +19,7 @@ app.views.ProjectView = Backbone.View.extend({
   },
 
   render: function() {
-    this.$el.html(this.template(this.model.attributes)); //attributes?
+    this.$el.html(this.template(this.model.attributes));
     return this;
   },
 

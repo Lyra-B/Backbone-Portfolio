@@ -1,17 +1,18 @@
 class ProjectsController < ApplicationController
 
   def create
-    project = Project.new(allowed_params)
+    @project = Project.new(allowed_params)
 
-    if project.save
-      render :json => project, :status => 201
+    if @project.save
+      render :json => @project, :status => 201
     else
       render :status => 500
     end
   end
 
   def index
-    render :json => Project.all
+    # @user = User.find(params[:user_id])
+    render :json => Project.where(:user_id => params[:user_id])
   end
 
   private
