@@ -53,6 +53,7 @@ GEM
     columnize (0.9.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
+    ejs (1.1.1)
     erubis (2.7.0)
     execjs (2.4.0)
     globalid (0.3.3)
@@ -163,6 +164,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    underscore-rails (1.8.2)
     web-console (2.1.2)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -173,6 +175,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ejs
   jbuilder (~> 2.0)
   jquery-rails
   pry-byebug
@@ -184,4 +187,5 @@ DEPENDENCIES
   sqlite3
   turbolinks
   uglifier (>= 1.3.0)
+  underscore-rails
   web-console (~> 2.0)
