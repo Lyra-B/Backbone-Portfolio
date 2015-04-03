@@ -20,6 +20,11 @@ class ProjectsController < ApplicationController
     render nothing: true
   end
 
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+  end
+
   private
   def allowed_params
     params.require(:project).permit(:title, :body, :image_url, :url, :user_id)
