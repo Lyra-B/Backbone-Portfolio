@@ -13,7 +13,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    render :json => User.find(params[:id])
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.json { render :json => @user }
+      format.html
+    end
   end
 
   def update
