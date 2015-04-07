@@ -103,4 +103,3 @@ app.views.UserView = Backbone.View.extend({
     });
   }
 });
-
