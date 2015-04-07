@@ -31,7 +31,8 @@ RSpec.describe ProjectsController, type: :controller do
         project: {
           title:"Blah",
           url: "Blah",
-          user_id: @user.id
+          user_id: @user.id,
+          skills_attributes: [{:name => "Ruby"}, {:name => "Javascript"}]
         }
       }
 
@@ -41,6 +42,12 @@ RSpec.describe ProjectsController, type: :controller do
     it("should save the project") do
       expect(Project.count).to eq(1)
       expect(@user.projects.count).to eq(1)
+    end
+
+    it("should save the skills") do
+      expect(assigns[:project].skills.count).to eq(2)
+      expect(assigns[:project].skills.first.name).to eq("Ruby")
+      expect(assigns[:project].skills.second.name).to eq("Javascript")
     end
 
     it("should return a valid JSON") do

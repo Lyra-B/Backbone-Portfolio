@@ -5,8 +5,13 @@ describe("A Project", function() {
   beforeEach(function() {
     project = new app.models.Project({
       title: "My amazing test project",
-      url: "http://example.org"
+      url: "http://example.org",
+      userId: 1
     });
+
+    project.skills.add([
+      {name: "Ruby"},{name: "Javascript"}
+      ]);
   });
 
   it("should be able to retrieve the title", function() {
@@ -21,14 +26,31 @@ describe("A Project", function() {
     expect(project.cid).not.toBe(null);
   });
 
-  describe("Persistance in local storage", function() {
+  describe("Persistance via Ajax", function() {
     beforeEach(function() {
+      spyOn($, "ajax");
+      // project.skills.add([{name: "Ruby"}, {name: "Javascript"}]);
       project.save();
     });
 
     it("should have an id", function() {
       expect(project.id).not.toBe(null);
     });
+
+    it("should save the first project via AJAX", function(){
+      var args = $.ajax.calls.argsFor(0)[0];
+      expect(args.url).toEqual("/projects");
+      expect(args.type).toEqual("POST");
+      expect(args.data).toEqual(JSON.stringify({
+        project: {
+          title: "My amazing test project",
+          url: "http://example.org",
+          user_id: 1,
+          skills_attributes: [{name: "Ruby"}, {name: "Javascript"}]
+        }
+      }));
+    });
+
   });
 
   describe("validation", function() {
