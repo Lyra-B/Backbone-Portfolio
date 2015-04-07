@@ -2,9 +2,16 @@ app.models.Project = Backbone.Model.extend({
 
   urlRoot: '/projects',
 
+  initialize: function(){
+    this.skills = new app.collections.SkillList();
+  },
+
   validate: function() {
     if(this.attributes.title === "" || this.attributes.title === undefined) {
       return "Title can't be blank";
+    };
+    if(this.attributes.url === "" || this.attributes.url === undefined) {
+      return "Url can't be blank";
     };
   },
 
@@ -15,8 +22,8 @@ app.models.Project = Backbone.Model.extend({
         body: this.get('body'),
         url: this.get('url'),
         image_url: this.get('imageUrl'),
-        user_id: this.get('userId')
-      }
+        user_id: this.get('userId'),
+        skills_attributes: this.skills.toJSON()      }
     };
     return params;
   },
