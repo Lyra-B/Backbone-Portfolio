@@ -12,16 +12,30 @@ app.views.ProjectView = Backbone.View.extend({
     'change .edit-body': 'updateBody',
     'dblclick .project-image': 'editImage',
     'change .edit-image': 'updateImage',
-    'click .remove-project': 'removeProject'
+    'click .remove-project': 'removeProject',
+    'click .add-skill': 'newSkill'
   },
 
   initialize: function() {
     this.listenTo(this.model, "change", this.render);
     this.listenTo(this.model, "destroy", this.remove);
+    // this.listenTo(this.model.skills, "reset", this.render);
+    this.listenTo(this.model.skills, "add", this.render);
   },
 
   render: function() {
     this.$el.html(this.template(this.model.attributes));
+    var _this = this
+    // this.listenTo(this.model, "change", this.render);
+    this.model.skills.each(function(skill){
+      var skillView = new app.views.SkillView({
+        model: skill,
+        attributes: {
+          project: _this.model
+        }
+      });
+      _this.$el.find('.skill-list').append(skillView.render().el);
+    });
     return this;
   },
 
@@ -77,5 +91,11 @@ app.views.ProjectView = Backbone.View.extend({
 
   remove: function(e) {
     this.$el.fadeOut(3000).html("");
+  },
+
+  newSkill: function(e) {
+    this.model.skills.add({
+      name: "Click to edit"
+    })
   }
 });

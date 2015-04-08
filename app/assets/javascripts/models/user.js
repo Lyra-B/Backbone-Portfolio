@@ -69,3 +69,4 @@ app.models.User = Backbone.Model.extend({
     };
   }
 });
+
