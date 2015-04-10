@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :users, :only => [:create, :index, :show, :update]
+  resources :users, :only => [:create, :index, :show, :update] do
+    collection do
+      get :authorize_github
+      get :github_oauth_callback
+    end
+  end
 
   resources :projects, :only => [:create, :index, :update, :destroy]
 

@@ -27,8 +27,41 @@ class UsersController < ApplicationController
     render nothing: true
   end
 
+  def authorize_github
+    redirect_to oauth2_client.auth_code.authorize_url(:redirect_uri => github_oauth_callback_users_url )
+  end
+
+  def github_oauth_callback
+    access_token = oauth2_client.auth_code.get_token(params[:code], :redirect_uri => github_oauth_callback_users_url)
+    user_info = JSON(access_token.get('https://api.github.com/user').body).symbolize_keys
+    @user = User.find_or_create_by!(:github_id => user_info[:id]) do |user|
+      user.first_name = user_info[:name].split[0]
+      user.last_name = user_info[:name].split[1]
+      user.email = user_info[:email]
+      user.biography = user_info[:bio]
+      user.mission = user_info[:company]
+      user.image_url = user_info[:avatar_url]
+    end
+
+    @user.access_token = access_token.token
+    @user.save
+
+    redirect_to root_path
+  end
+
   private
   def allowed_params
     params.require(:user).permit(:first_name, :last_name, :biography, :mission, :image_url)
+  end
+
+  def oauth2_client
+    OAuth2::Client.new(
+      Rails.application.secrets.github["client_id"],
+      Rails.application.secrets.github["client_secret"],
+      :site => 'https://github.com',
+      :authorize_url => '/login/oauth/authorize',
+      :token_url => '/login/oauth/access_token'
+    )
+
   end
 end
