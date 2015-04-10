@@ -14,14 +14,14 @@ app.views.UserView = Backbone.View.extend({
     'change .edit-mission': 'updateMission',
     'dblclick .bio-image': 'editImage',
     'change .edit-image': 'updateImage',
-    'click .newProject': 'projectNew'
+    'click .newProject': 'projectNew',
+    'click #follow' : 'followUser'
   },
 
   initialize: function(){
     this.listenTo(this.model, "change", this.render);
     this.listenTo(this.model.projects, "reset", this.render);
     this.listenTo(this.model.projects, "add", this.render);
-
   },
 
   render: function() {
@@ -32,6 +32,11 @@ app.views.UserView = Backbone.View.extend({
       collection: this.model.projects
     });
 
+    var followerListView = new app.views.FollowerListView({
+      collection: this.model.followers
+    });
+
+    this.$el.append(followerListView.render().el);
     this.$el.append(projectListView.render().el);
     return this;
   },
@@ -101,5 +106,10 @@ app.views.UserView = Backbone.View.extend({
       body: "Click to edit",
       imageUrl: "uploads/images.png"
     });
+  },
+
+  followUser: function(e) {
+    var follower = new app.models.Follower({id: 1, followed_id: this.model.id});
+    this.model.followers.create(follower);
   }
 });

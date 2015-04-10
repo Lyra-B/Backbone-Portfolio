@@ -11,9 +11,12 @@ app.models.User = Backbone.Model.extend({
   },
 
   initialize: function() {
+    this.followers = new app.collections.FollowerList();
+    this.followers.user = this;
     this.projects = new app.collections.ProjectList();
     this.projects.user = this;
     this.bind("sync", this.fetchProjects);
+    // this.bind("sync", this.fetchFollowers);
   },
 
 
@@ -28,6 +31,16 @@ app.models.User = Backbone.Model.extend({
       });
     }
   },
+
+  // fetchFollowers: function() {
+  //   var _this = this
+  //   this.followers.fetch({
+  //     success: function(followers){
+  //       console.log("Get to followers");
+  //       _this.followers.reset(_this.followers.models);
+  //     }
+  //   });
+  // },
 
   fullName: function() {
     return [this.get("firstName"), this.get("lastName")].join(" ");
