@@ -26,6 +26,11 @@ gem 'ejs'
 
 gem 'underscore-rails'
 
+gem 'oauth2'
+
+
+# gem 'my_amazing_follow_service_2', :path => '/Users/Glykeria/projects/my_amazing_follow_service_2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
