@@ -26,6 +26,11 @@ class ProjectsController < ApplicationController
     @project.destroy
   end
 
+  def github_oauth_callback
+    binding.pry
+    project_info = JSON(access_token.get('https://api.github.com/users/repos').body).symbolize_keys
+  end
+
   private
   def allowed_params
     params.require(:project).permit(:title, :body, :image_url, :url, :user_id, :skills_attributes => [:id, :name])

@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
 
   resources :users, :only => [:create, :index, :show, :update] do
+    # resources :projects, :only => [:create, :index, :update, :destroy]
     collection do
       get :authorize_github
       get :github_oauth_callback
     end
   end
 
-  resources :projects, :only => [:create, :index, :update, :destroy]
+  resources :projects, :only => [:create, :index, :update, :destroy] do
+    # collection do
+    #   get :github_oauth_callback
+    # end
+  end
 
   root to: 'backbone#app'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -32,8 +32,9 @@ class UsersController < ApplicationController
   end
 
   def github_oauth_callback
-    access_token = oauth2_client.auth_code.get_token(params[:code], :redirect_uri => github_oauth_callback_users_url)
+    # access_token = oauth2_client.auth_code.get_token(params[:code], :redirect_uri => github_oauth_callback_users_url)
     user_info = JSON(access_token.get('https://api.github.com/user').body).symbolize_keys
+    binding.pry
     @user = User.find_or_create_by!(:github_id => user_info[:id]) do |user|
       user.first_name = user_info[:name].split[0]
       user.last_name = user_info[:name].split[1]
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
       user.mission = user_info[:company]
       user.image_url = user_info[:avatar_url]
     end
-
+    binding.pry
     @user.access_token = access_token.token
     @user.save
 
@@ -52,16 +53,5 @@ class UsersController < ApplicationController
   private
   def allowed_params
     params.require(:user).permit(:first_name, :last_name, :biography, :mission, :image_url)
-  end
-
-  def oauth2_client
-    OAuth2::Client.new(
-      Rails.application.secrets.github["client_id"],
-      Rails.application.secrets.github["client_secret"],
-      :site => 'https://github.com',
-      :authorize_url => '/login/oauth/authorize',
-      :token_url => '/login/oauth/access_token'
-    )
-
   end
 end
