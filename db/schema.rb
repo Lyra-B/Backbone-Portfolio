@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407104724) do
+ActiveRecord::Schema.define(version: 20150410102137) do
 
   create_table "project_skills", force: :cascade do |t|
     t.integer  "project_id"
@@ -43,8 +43,11 @@ ActiveRecord::Schema.define(version: 20150407104724) do
     t.string   "biography"
     t.string   "mission"
     t.string   "image_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "email"
+    t.string   "access_token"
+    t.integer  "github_id"
   end
 
 end
