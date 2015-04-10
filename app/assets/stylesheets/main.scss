@@ -186,3 +186,19 @@ ul.skill-list li {
 .clear {
   clear: both;
 }
+
+.login-github {
+  display: block;
+  background: #E3E3E3 url(http://uxrepo.com/static/icon-sets/elusive/svg/github.svg) 5px 4px no-repeat;
+  border: 2px solid #333;
+  box-shadow: 2px 2px 2px #000;
+  text-decoration: none;
+  height: 2em;
+  width: 200px;
+  background-size: 14%;
+  padding: 0.5em 0.5em 0.5em 5em;
+  color: #333;
+  margin: 1em;
+  line-height: 2em;
+  border-radius: 1em;
+}
