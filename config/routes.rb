@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     collection do
       get :authorize_github
       get :github_oauth_callback
+      get :authorize_instagram
+      get :instagram_oauth_callback
     end
   end
 
