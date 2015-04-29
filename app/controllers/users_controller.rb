@@ -12,6 +12,23 @@ class UsersController < ApplicationController
     render :json => User.all
   end
 
+  def authorize_instagram
+    redirect_to instagram_oauth.auth_code.authorize_url(
+      :redirect_uri => instagram_oauth_callback_users_url
+      )
+  end
+
+  def instagram_oauth_callback
+    oauth_response = Instagram.get_access_token(params[:code], :redirect_uri => instagram_oauth_callback_users_url)
+    oauth_response["access_token"]
+
+    @user = User.find(session[:user_id])
+    @user.instagram_access_token = oauth_response["access_token"]
+    @user.save!
+
+    redirect_to root_path
+  end
+
   def show
     @user = User.find(params[:id])
 
@@ -32,9 +49,8 @@ class UsersController < ApplicationController
   end
 
   def github_oauth_callback
-    # access_token = oauth2_client.auth_code.get_token(params[:code], :redirect_uri => github_oauth_callback_users_url)
+    access_token = oauth2_client.auth_code.get_token(params[:code], :redirect_uri => github_oauth_callback_users_url)
     user_info = JSON(access_token.get('https://api.github.com/user').body).symbolize_keys
-    binding.pry
     @user = User.find_or_create_by!(:github_id => user_info[:id]) do |user|
       user.first_name = user_info[:name].split[0]
       user.last_name = user_info[:name].split[1]
@@ -43,10 +59,9 @@ class UsersController < ApplicationController
       user.mission = user_info[:company]
       user.image_url = user_info[:avatar_url]
     end
-    binding.pry
     @user.access_token = access_token.token
     @user.save
-
+    session[:user_id] = @user.id
     redirect_to root_path
   end
 
