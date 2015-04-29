@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   end
 
   def github_oauth_callback
-    binding.pry
+
     project_info = JSON(access_token.get('https://api.github.com/users/repos').body).symbolize_keys
   end
 
