@@ -15,7 +15,11 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def access_token
-    oauth2_client.auth_code.get_token(params[:code], :redirect_uri => github_oauth_callback_users_url)
+  def instagram_oauth
+    OAuth2::Client.new(
+      Rails.application.secrets.instagram["client_id"],
+      Rails.application.secrets.instagram["client_secret"],
+      :site => 'https://api.instagram.com'
+    )
   end
 end
